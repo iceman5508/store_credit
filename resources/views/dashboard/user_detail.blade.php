@@ -80,8 +80,8 @@
 
 
 @section('scripts')
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('vendors/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendors/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <script>
         $(document).ready(function() {

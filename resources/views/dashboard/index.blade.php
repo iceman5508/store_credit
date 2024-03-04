@@ -24,17 +24,17 @@
     @include('dashboard.partials.addTransaction')
     <!-- Page level plugins -->
 
-    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('vendors/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendors/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
     <script>
         $(document).ready(function() {
             $('#dataTable2').DataTable( {
-                order: [[4, 'desc']]
+                order: [[3, 'asc']]
             });
             $('#dataTable').DataTable(
                 {
-                    order: [[5, 'desc']]
+                    order: [[5, 'asc']]
                 }
             );
         });
