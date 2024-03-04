@@ -1,0 +1,14 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+//@import 'bootstrap/scss/bootstrap';
+
+.dataTable tbody tr:hover {
+    cursor: pointer;
+    background: #4e73df;
+    color: white;
+}
