@@ -18,13 +18,13 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
 
 </head>
 
 <body class="bg-gradient-primary">
 
-<div class="container">
+<div class="container ">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -35,7 +35,9 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image bg-gradient-red">
+                            <img src="{{asset('img/logo.png')}}" class="img-fluid" alt="Responsive image">
+                        </div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
@@ -55,7 +57,7 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mt-2 mb-4">
                                         <input
                                                placeholder="Password"
                                                id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"
@@ -79,19 +81,13 @@
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         {{ __('Login') }}
                                     </button>
-                                    <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>
+
                                 </form>
                                 <hr>
-                                <div class="text-center">
+                                <div class="text-center mt-4">
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div>
-                                <div class="text-center">
+                                <div class="text-center mb-4">
                                     <a class="small" href="register.html">Create an Account!</a>
                                 </div>
                             </div>
