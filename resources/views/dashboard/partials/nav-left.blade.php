@@ -9,7 +9,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ request()->is('home') || request()->is('default')  ? 'active' : '' }}">
         <a class="nav-link" href="{{route('home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -24,16 +24,17 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {{ request()->is('dashboard/settings/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
            aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
             <span>Settings</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse {{ request()->is('dashboard/settings/*') ? 'active' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="buttons.html">App</a>
                 <a class="collapse-item" href="cards.html">Roles</a>
+                <a class="collapse-item {{ request()->routeIs('fields') ? 'active' : '' }} " href="{{route('fields')}}">User Fields</a>
             </div>
         </div>
     </li>
@@ -48,8 +49,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="utilities-color.html">App Users</a>
-                <a class="collapse-item" href="utilities-border.html">Customers</a>
+                <a class="collapse-item" href="">App Users</a>
+                <a class="collapse-item" href="">Customers</a>
             </div>
         </div>
     </li>
