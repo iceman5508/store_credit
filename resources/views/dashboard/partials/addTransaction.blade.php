@@ -13,9 +13,11 @@
                     @csrf
                     <div class="form-group">
                         <select class="form-select form-control @error('selCustomer') is-invalid @enderror" aria-label="Default select example" id="selCustomer" name="selCustomer" required>
-                            <option value="">Select a Customer</option>
-                            @foreach(Auth::user()->store->customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                            @if(!$show_default)
+                                 <option value="">Select a Customer</option>
+                            @endif
+                            @foreach($customerTransaction as $customer)
+                                <option value="{{$customer->id}}" @if($show_default) selected readonly @endif>{{$customer->name}}</option>
                             @endforeach
                         </select>
 

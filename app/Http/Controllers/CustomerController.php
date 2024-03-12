@@ -64,6 +64,16 @@ class CustomerController extends Controller
             'trans_credit' => 'required|min:1',
         ]);
 
+
+        if($request->trans_credit < 0)
+        {
+            $user = User::findOrFail($request->selCustomer);
+            if($user->available_credit() < ($request->trans_credit)*-1){
+                return back()->with('error',"User does not have enough credit to complete this transaction!");
+            }
+        }
+
+
         Credit::create([
             'store_id' => Auth::user()->store->id,
             'user_id' => $request->selCustomer,
@@ -72,6 +82,38 @@ class CustomerController extends Controller
         ]);
 
         return back()->with('success',"Transaction was successfully completed.");
+
+    }
+
+    /**
+     * Update User detail
+     * @param User $id
+     * @param Request $request
+     * @return void
+     */
+    public function updateUser(User $id, Request $request){
+        $store = Auth::user()->store->id;
+        if($request->customerEmail !== $id->email){
+            $validated = $request->validate([
+                'email' => [
+                    'required', 'min:5', 'email', 'unique:users',
+                    Rule::unique('users','email')->where('store_id', $store)
+                ],
+                'inputUsername' => 'required|min:3',
+            ]);
+        }else{
+            $validated = $request->validate([
+                'email' => ['required', 'min:5', 'email'],
+                'inputUsername' => 'required|min:3',
+            ]);
+        }
+
+        $id->name = $request->inputUsername;
+        $id->email = $request->email;
+        $id->save();
+
+        return back()->with('success',"User Detail was saved.");
+
 
     }
 }

@@ -12,9 +12,9 @@
                 <!-- Profile picture card-->
                 <div class="card mb-4 mb-xl-0">
                     <div class="card-header">{{$user->name}}</div>
-                    <div class="card-body text-center">
+                    <div class="card-body text-center user-profile-img bg-gradient-red">
                         <!-- Profile picture image-->
-                        <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                        <img src="{{asset('img/logo.png')}}" class="img-fluid" alt="Responsive image">
                         <!-- Profile picture help block-->
 
                         <!-- Profile picture upload button-->
@@ -27,18 +27,30 @@
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
                     <div class="card-body">
-                        <form>
+                        <form class="user" method="POST" action="{{ route('updateUser', ['id' => $user->id]) }}">
+                            @csrf
+                            @method('PATCH')
                             <!-- Form Group (username)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Name</label>
-                                <input class="form-control" id="inputUsername" type="text" placeholder="Enter Customer Name" value="{{$user->name}}">
+                                <input class="form-control  @error('inputUsername') is-invalid @enderror" id="inputUsername" name="inputUsername" type="text" placeholder="Enter Customer Name" value="{{$user->name}}" required>
+                                @error('inputUsername')
+                                <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
                                 <!-- Form Group (first name)-->
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="customerEmail">Email</label>
-                                    <input class="form-control" id="customerEmail" type="text" placeholder="Enter Customer Email" value="{{$user->email}}">
+                                    <input class="form-control  @error('email') is-invalid @enderror" id="email" name="email" type="text" placeholder="Enter Customer Email" value="{{$user->email}}" required>
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                             <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <!-- Form Group (last name)-->
                                 <div class="col-md-6">
@@ -61,7 +73,7 @@
                             </div>
 
                             <!-- Save changes button-->
-                            <button class="btn btn-primary" type="button">Save changes</button>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
                         </form>
                     </div>
                 </div>
@@ -80,6 +92,8 @@
 
 
 @section('scripts')
+
+    @include('dashboard.partials.addTransaction', ['customerTransaction' => [$user], 'show_default' => true])
     <script src="{{asset('vendors/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendors/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
@@ -89,6 +103,32 @@
                 order: [[2, 'desc']]
             });
         });
+
+
+
+        //save transaction
+        $('#submitTransaction').on('click', function (){
+            let elements = ['selCustomer','trans_credit'];
+            let valid = true;
+            elements.forEach(function(element){
+
+                console.log($(`#${element}`).val());
+                if($(`#${element}`).val() == null || $(`#${element}`).val() == "" ){
+                    valid = false;
+                    $(`.${element}-error`).html(`Field is required`);
+                }else{
+                    $(`.${element}-error`).html('');
+                }
+            });
+            if(valid){
+                document.getElementById('save-transaction-form').submit();
+            }else{
+
+                $('#save-transaction-form').addClass('was-validated');
+            }
+
+        });
+
     </script>
 
 @endsection

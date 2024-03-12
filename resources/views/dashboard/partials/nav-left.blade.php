@@ -2,7 +2,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('home')}}">
-        <div class="sidebar-brand-text mx-3">{{Auth::user()->store->name}}</div>
+        <div class="sidebar-brand-text mx-3">LGS Database</div>
     </a>
 
     <!-- Divider -->

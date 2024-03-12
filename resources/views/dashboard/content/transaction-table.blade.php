@@ -2,9 +2,10 @@
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Transaction Table</h6>
-                <div class="btn btn-primary float-right text-white" id="newCustBtn" data-toggle="modal" data-target="#addCustomerModal">Add Transaction</div>
+                <h6 class="m-0 font-weight-bold text-primary">Store Transaction Table</h6>
+                <div class="btn btn-primary float-right text-white" id="newTransaction" data-toggle="modal" data-target="#addTransactionModal">Add Transaction</div>
             </div>
+
 
             <div class="card-body">
                 <div class="table-responsive">

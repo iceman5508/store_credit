@@ -21,7 +21,7 @@
 @section('scripts')
 
     @include('dashboard.partials.addCustomer')
-    @include('dashboard.partials.addTransaction')
+    @include('dashboard.partials.addTransaction', ['customerTransaction' => Auth::user()->store->customers, 'show_default' => false])
     <!-- Page level plugins -->
 
     <script src="{{asset('vendors/datatables/jquery.dataTables.min.js')}}"></script>

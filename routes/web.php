@@ -33,4 +33,6 @@ Route::post('/save-customer', [\App\Http\Controllers\CustomerController::class, 
 
 Route::post('/save-transaction', [\App\Http\Controllers\CustomerController::class, 'saveTransaction'])->name('saveTransaction');
 
+Route::patch('/update-user/{id}', [\App\Http\Controllers\CustomerController::class, 'updateUser'])->name('updateUser');
+
 Route::get('/customer-detail/{id}', [\App\Http\Controllers\CustomerController::class, 'details'])->name('customerDetail');
