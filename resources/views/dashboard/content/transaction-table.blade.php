@@ -1,4 +1,4 @@
-<div class="row">
+
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -40,4 +40,4 @@
             </div>
         </div>
     </div>
-</div>
+

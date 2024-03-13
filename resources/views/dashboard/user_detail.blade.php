@@ -7,7 +7,7 @@
     <div class="container-xl px-4 mt-4">
         <!-- Account page navigation-->
         <hr class="mt-0 mb-4">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-xl-4">
                 <!-- Profile picture card-->
                 <div class="card mb-4 mb-xl-0">
@@ -78,8 +78,16 @@
                     </div>
                 </div>
 
-                @include('dashboard.content.transaction-table')
 
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xl-6">
+
+            </div>
+            <div class="col-md-6 col-xl-6">
+                @include('dashboard.content.transaction-table')
             </div>
         </div>
     </div>

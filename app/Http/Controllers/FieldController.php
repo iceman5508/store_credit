@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EnabledField;
+use App\Models\Field;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +13,9 @@ class FieldController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index(){
-        return view('dashboard.fields');
+        $store = Auth::user()->store->id;
+        $all_fields = Field::storeEnabled($store);
+        return view('dashboard.fields', compact('all_fields'));
     }
 
     /**
@@ -23,10 +26,10 @@ class FieldController extends Controller
         $store = Auth::user()->store->id;
         $validated = $request->validate([
             'field_value' => [
-                'required', 'min:1', 'numeric', 'exists:fields,id'
+                'required', 'min:0', 'numeric', 'exists:fields,id'
             ],
             'field_id' => [
-                'required', 'min:1', 'numeric'
+                'required', 'min:0', 'numeric'
             ],
             'field_status' => [
                 'required', 'min:0', 'numeric'
@@ -36,13 +39,18 @@ class FieldController extends Controller
         $settings = EnabledField::find($request->field_id);
 
         if(!empty($settings)){
-            $settings->status = $request->field_status;
-            $settings->save();
+            if($settings->store_id === $store){
+                $settings->status = $request->field_status;
+                $settings->save();
+            }else{
+                return back()->with('error',"Unauthorized Access.");
+            }
         }else{
             $settings=   EnabledField::create(
                 [
                     'store_id' => $store,
-                    'field_id' => $request->field_value
+                    'field_id' => $request->field_value,
+                    'status' => 1
                 ]
             );
         }
@@ -52,6 +60,22 @@ class FieldController extends Controller
         }
         return back()->with('error',"The field could not be toggled, please try again later.");
 
+
+    }
+
+
+    public function addField(Request $request){
+        $validated = $request->validate([
+            'field' => [
+                'required', 'min:5',  'unique:fields,name,'
+            ]
+        ]);
+
+        Field::create([
+            'name' => $request->field
+        ]);
+
+        return back()->with('success',"The field, {$request->field}, was successfully created.");
 
     }
 }

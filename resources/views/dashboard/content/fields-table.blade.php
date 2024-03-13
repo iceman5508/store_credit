@@ -3,6 +3,8 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Fields Table</h6>
+                <div class="btn btn-primary float-right text-white" id="newField" data-toggle="modal" data-target="#addUserFieldModal">Add Field</div>
+
             </div>
 
             <div class="card-body">
@@ -23,9 +25,10 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        @foreach (Auth::user()->store->enabled_fields as $fields)
-                            <tr onclick="$('.field_id').val({{$fields->id}}); $('.field_value').val({{$fields->field_id}})">
-                                <td>{{$fields->field->name}}</td>
+                        @foreach ($all_fields as $fields)
+
+                            <tr onclick="  @if (!empty($fields->store_id)) $('.field_id').val({{$fields->enabled_id}}); @endif  $('.field_value').val({{$fields->field_id}});">
+                                <td>{{$fields->name}}</td>
                                 <td>{{!empty($fields->status) ? 'Active' : 'Inactive' }}</td>
                                 <td>
                                     @if(empty($fields->status))
@@ -52,3 +55,4 @@
 
 @include('dashboard.partials.deactivate-field-modal');
 @include('dashboard.partials.activate-field-modal');
+@include('dashboard.partials.addFieldModal');

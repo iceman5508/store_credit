@@ -42,6 +42,8 @@ Route::middleware('auth')->prefix('dashboard/')->group(function(){
         Route::get('/fields', [\App\Http\Controllers\FieldController::class, 'index'])->name('fields');
         Route::post('/fields', [\App\Http\Controllers\FieldController::class, 'toggleField'])->name('toggleField');
 
+        Route::post('/addField', [\App\Http\Controllers\FieldController::class, 'addField'])->name('addField');
+
     });
 
 });
