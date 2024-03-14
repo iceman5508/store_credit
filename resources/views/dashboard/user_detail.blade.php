@@ -84,7 +84,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-xl-6">
-
+            @include('dashboard.content.users-fields-table')
             </div>
             <div class="col-md-6 col-xl-6">
                 @include('dashboard.content.transaction-table')
@@ -110,6 +110,10 @@
             $('#dataTable').DataTable({
                 order: [[2, 'desc']]
             });
+
+            $('#user-field-list').DataTable();
+
+
         });
 
 
@@ -133,6 +137,30 @@
             }else{
 
                 $('#save-transaction-form').addClass('was-validated');
+            }
+
+        });
+
+
+        //save user field
+        $('#submitUserField').on('click', function (){
+            let elements = ['selField','fieldValue'];
+            let valid = true;
+            elements.forEach(function(element){
+
+                console.log($(`#${element}`).val());
+                if($(`#${element}`).val() == null || $(`#${element}`).val() == "" ){
+                    valid = false;
+                    $(`.${element}-error`).html(`Field is required`);
+                }else{
+                    $(`.${element}-error`).html('');
+                }
+            });
+            if(valid){
+                document.getElementById('save-field-form').submit();
+            }else{
+
+                $('#save-field-form').addClass('was-validated');
             }
 
         });

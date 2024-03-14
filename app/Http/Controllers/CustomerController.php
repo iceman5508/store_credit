@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NewCustomerRequest;
 use App\Models\Credit;
 use App\Models\User;
+use App\Models\UserMeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -49,7 +50,8 @@ class CustomerController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function details(User $id, Request $request){
-        return view('dashboard.user_detail',['user' => $id]);
+        $user_fields = User::store_fields($id->id);
+        return view('dashboard.user_detail',['user' => $id, 'user_fields' => $user_fields]);
     }
 
 
@@ -114,6 +116,52 @@ class CustomerController extends Controller
 
         return back()->with('success',"User Detail was saved.");
 
+    }
+
+    /**
+     * @param User $user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function toggleUserField(User $user, Request $request){
+        $store = Auth::user()->store->id;
+        $validated = $request->validate([
+            'selected_field' => [
+                'required', 'min:1', 'numeric', 'exists:fields,id'
+            ],
+            'fieldValue' => [
+                'required', 'min:4'
+            ],
+
+            'userMeta' => [
+                'required', 'min:0', 'numeric'
+            ]
+        ]);
+
+        $field = UserMeta::find($request->userMeta);
+
+        if(!empty($field)){
+            if($field->user_id === $user->id && $field->store_id === $store && $field->field_id ===  (int)$request->selected_field){
+                $field->value = $request->fieldValue;
+                $field->save();
+            }else{
+                return back()->with('error',"Unauthorized Access.");
+            }
+        }else{
+            $field = UserMeta::create(
+                [
+                    'store_id' => $store,
+                    'user_id' => $user->id,
+                    'field_id' =>  $request->selected_field,
+                    'value' => $request->fieldValue
+                ]
+            );
+        }
+
+        if($field){
+            return back()->with('success',"The field was successfully saved.");
+        }
+        return back()->with('error',"The field could not be saved, please try again later.");
 
     }
 }

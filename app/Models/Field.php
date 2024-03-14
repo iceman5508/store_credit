@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Field extends Model
@@ -26,4 +27,5 @@ class Field extends Model
                             LEFT JOIN enabled_fields ef ON ef.field_id = f.id
                             WHERE store_id = ? OR (ef.store_id IS NULL AND ef.status IS NULL)", [$id]);
     }
+
 }

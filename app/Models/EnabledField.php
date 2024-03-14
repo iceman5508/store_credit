@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class EnabledField extends Model
 {
@@ -26,8 +27,6 @@ class EnabledField extends Model
     public function field(){
         return $this->hasOne(Field::class,'id', 'field_id');
     }
-
-
 
 
 }
