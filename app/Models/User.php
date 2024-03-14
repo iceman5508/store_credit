@@ -105,6 +105,7 @@ class User extends Authenticatable
                             Left JOIN users_meta um ON um.field_id = f.id
                             WHERE (ef.store_id = ? OR (ef.store_id IS NULL AND ef.status IS NULL) )
                             AND ( um.user_id = ? OR (um.store_id IS NULL AND um.user_id IS NULL))
+                            AND (ef.status = 1 OR ef.status IS NULL)
         ", [$store, $user_id]);
     }
 }
