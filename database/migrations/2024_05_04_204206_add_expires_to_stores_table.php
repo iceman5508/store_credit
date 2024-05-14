@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('store_id')->nullable();
-            $table->integer('role_id')->nullable();
+        Schema::table('stores', function (Blueprint $table) {
+            $table->date('expired_at')->nullable();
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('store_id');
-            $table->dropColumn('role_id');
+        Schema::table('stores', function (Blueprint $table) {
+            $table->dropColumn('expired_at');
         });
     }
 };

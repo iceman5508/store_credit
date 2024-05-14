@@ -24,6 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        if(!empty(Auth::user()->store_id)){
+            return view('dashboard.index');
+        }
+        return redirect('dashboard/addStore');
+
+    }
+
+
+    public function preLogout(){
+        Auth::user()->store_id = 0;
+        Auth::user()->save();
+        return redirect()->route('logout');
     }
 }

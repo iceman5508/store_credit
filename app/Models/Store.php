@@ -16,7 +16,9 @@ class Store extends Model
      */
     protected $fillable = [
         'name',
-        'owner_id'
+        'owner_id',
+        'package_id',
+        'expired_at',
     ];
 
     /**
@@ -70,6 +72,15 @@ class Store extends Model
      */
     public function enabled_fields(){
         return $this->hasMany(EnabledField::class,'store_id','id');
+    }
+
+    /**
+     * Get the current package
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
     }
 
 

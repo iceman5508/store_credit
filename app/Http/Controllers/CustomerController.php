@@ -164,4 +164,8 @@ class CustomerController extends Controller
         return back()->with('error',"The field could not be saved, please try again later.");
 
     }
+
+    function index(){
+        return 'Customer Table gors here';
+    }
 }

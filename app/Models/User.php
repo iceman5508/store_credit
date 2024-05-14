@@ -52,7 +52,7 @@ class User extends Authenticatable
      */
     public function store(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(Store::class, 'id' );
+        return $this->hasOne(Store::class, 'id' , 'store_id');
     }
 
 

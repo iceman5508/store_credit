@@ -9,8 +9,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ request()->is('home') || request()->is('default')  ? 'active' : '' }}">
-        <a class="nav-link" href="{{route('home')}}">
+    <li class="nav-item {{ request()->is('default')  ? 'active' : '' }}">
+        <a class="nav-link" href="/">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -50,7 +50,7 @@
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="">App Users</a>
-                <a class="collapse-item" href="">Customers</a>
+                <a class="collapse-item" href="{{route('customers')}}">Customers</a>
             </div>
         </div>
     </li>

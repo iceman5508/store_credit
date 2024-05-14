@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = 'dashboard/addStore';
 
     /**
      * Create a new controller instance.
@@ -67,6 +67,17 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'store_id' => 0,
+            'role_id' => 0
         ]);
+    }
+
+
+    /**
+     * Add store
+     * @return void
+     */
+    function addStore(){
+       return 'Add Store';
     }
 }
