@@ -166,6 +166,6 @@ class CustomerController extends Controller
     }
 
     function index(){
-        return 'Customer Table gors here';
+        return view('dashboard.customers');
     }
 }
