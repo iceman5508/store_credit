@@ -50,7 +50,7 @@ class CustomerController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function details(User $id, Request $request){
-        $user_fields = User::store_fields($id->id);
+        $user_fields = $id->store->userFields($id->id);
         return view('dashboard.user_detail',['user' => $id, 'user_fields' => $user_fields]);
     }
 

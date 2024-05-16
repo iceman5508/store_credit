@@ -14,8 +14,8 @@
                     <div class="form-group">
                         <select class="form-select form-control selField @error('selField') is-invalid @enderror" aria-label="Default select example" id="selField" name="selField" required disabled>
                             <option value="">Select a Field</option>
-                            @foreach($storeField as $field)
-                                <option value="{{$field->field_id}}">{{$field->name}}</option>
+                            @foreach($storeField as $key =>$field)
+                                <option value="{{$field['field_id']}}">{{$field['name']}}</option>
                             @endforeach
                         </select>
 

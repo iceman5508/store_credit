@@ -28,4 +28,14 @@ class Field extends Model
                             WHERE store_id = ? OR (ef.store_id IS NULL AND ef.status IS NULL)", [$id]);
     }
 
+    /**
+     * @param $store_id
+     * @param $user_id
+     * @return array
+     */
+    public function storeUserValue($store_id, $user_id){
+        return DB::select("SELECT id, value from users_meta where store_id = ? AND user_id = ? AND field_id = ?;
+                            ", [$store_id, $user_id, $this->id]);
+    }
+
 }

@@ -75,6 +75,43 @@ class Store extends Model
     }
 
     /**
+     * Return all the user fields
+     * @param int $user_id
+     * @param int $store_id
+     * @return array
+     */
+    public function userFields(int $user_id): array
+    {
+        $fields = [];
+        foreach ($this->enabled_fields()->get() as $efields){
+            $value = $efields->field->storeUserValue($this->id, $user_id);
+            if(!empty($value)){
+                $value = $value[0];
+
+                $field = [
+                            'field_id' => $efields->field->id,
+                            'name' => $efields->field->name,
+                            'value' =>$value->value,
+                            'user_id' => $user_id,
+                            'um_id' => $value->id
+                ];
+            }else{
+                $field = [
+                    'field_id' => $efields->field->id,
+                    'name' => $efields->field->name,
+                    'value' =>'',
+                    'user_id' => $user_id,
+                    'um_id' => ''
+                ];
+            }
+
+            $fields[$efields->field->name] = $field;
+        }
+        return $fields;
+
+    }
+
+    /**
      * Get the current package
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

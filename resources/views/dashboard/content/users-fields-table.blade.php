@@ -21,14 +21,14 @@
                         </tr>
                         </tfoot>
                         <tbody >
-                        @foreach ($user_fields as $user_field)
+                        @foreach ($user_fields as $key => $user_field)
                             <tr data-toggle="modal" data-target="#UserFieldModal" onclick="
-                                $('#fieldValue').val('{{$user_field->value}}');
-                                  $('.selField').val({{$user_field->field_id}});
-                                @if(!empty($user_field->um_id)) $('#userMeta').val({{$user_field->um_id}}); @endif
+                                $('#fieldValue').val('{{$user_field['value']}}');
+                                  $('.selField').val({{$user_field['field_id']}});
+                                @if(!empty($user_field['um_id'])) $('#userMeta').val({{$user_field['um_id']}}); @endif
                             ">
-                                <td>{{$user_field->name}}</td>
-                                <td>{{$user_field->value}}</td>
+                                <td>{{$user_field['name']}}</td>
+                                <td>{{$user_field['value']}}</td>
                             </tr>
                         @endforeach
 
