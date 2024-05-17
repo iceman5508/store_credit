@@ -34,7 +34,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="buttons.html">App</a>
                 <a class="collapse-item" href="cards.html">Roles</a>
-                <a class="collapse-item {{ request()->routeIs('fields') ? 'active' : '' }} " href="{{route('fields')}}">User Fields</a>
+                @if(Auth::user()->role_id === 1) <a class="collapse-item {{ request()->routeIs('fields') ? 'active' : '' }} " href="{{route('fields')}}">User Fields</a>@endif
             </div>
         </div>
     </li>
@@ -49,7 +49,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('employees')}}">Employees</a>
+                @if(Auth::user()->role_id === 1)<a class="collapse-item" href="{{route('employees')}}">Employees</a>@endif
                 <a class="collapse-item" href="{{route('customers')}}">Customers</a>
                 <a class="collapse-item" href="{{route('transactions')}}">Transactions</a>
             </div>

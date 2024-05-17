@@ -63,8 +63,11 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth::user()->store_id = 0;
-        Auth::user()->save();
+        if(Auth::user()->role_id === 1){
+            Auth::user()->store_id = 0;
+            Auth::user()->save();
+        }
+
         $this->guard()->logout();
 
         $request->session()->invalidate();

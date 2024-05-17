@@ -16,11 +16,21 @@ class StoreController extends Controller
 
     public function index()
     {
+        if(auth()->user()->role_id !== 0){
+            return view('dashboard.index');
+        }
         return view('dashboard.employees');
     }
 
     public function addStore(){
-        $store = Store::where('owner_id', auth()->user()->id)->get();
+
+        if(auth()->user()->store_id === 0){
+            $store = Store::where('owner_id', auth()->user()->id)->get();
+        }else{
+            $store = Store::where('id', auth()->user()->store_id)->get();
+        }
+
+
         $package = Package::all();
        return view('addStore', compact('store', 'package'));
     }

@@ -36,21 +36,23 @@
                         @endif
 
                         <!-- Button trigger modal -->
+                       @if(Auth::user()->role_id === 1)
                         <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addStoreModal">
                             Add Store
                         </button>
+                         @endif
 
                         <table class="table">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Store Name</th>
-                                <th scope="col">Subscription Package</th>
-                                <th scope="col">Subscriptions</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Expires</th>
-
-
+                                @if(Auth::user()->role_id === 1)
+                                    <th scope="col">Subscription Package</th>
+                                    <th scope="col">Subscriptions</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Expires</th>
+                               @endif
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -59,29 +61,32 @@
                                 <tr>
                                     <th scope="row">{{$stores->id}}</th>
                                     <td>{{$stores->name}}</td>
-                                    <td>{{($stores->package) ? $stores->package->name : 'Not Selected' }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#subscriptionModal" data-store-id="{{ $stores->id }}">
-                                            Select Subscription
-                                        </button>
-                                    </td>
-                                    @if($stores->package)
-                                        <td>{{(strtotime($stores->expired_at) > strtotime(date("Y-m-d"))) ? 'Active' : 'Inactive'}}</td>
-                                        <td>{{date("m-d-Y", strtotime($stores->expired_at))}}</td>
-                                    @else
-                                        <td>Inactive</td>
-                                        <td>No Active Subscription</td>
+                                    @if(Auth::user()->role_id === 1)
+                                        <td>{{($stores->package) ? $stores->package->name : 'Not Selected' }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#subscriptionModal" data-store-id="{{ $stores->id }}">
+                                                Select Subscription
+                                            </button>
+                                        </td>
+                                        @if($stores->package)
+                                            <td>{{(strtotime($stores->expired_at) > strtotime(date("Y-m-d"))) ? 'Active' : 'Inactive'}}</td>
+                                            <td>{{date("m-d-Y", strtotime($stores->expired_at))}}</td>
+                                        @else
+                                            <td>Inactive</td>
+                                            <td>No Active Subscription</td>
+                                        @endif
                                     @endif
                                     <td>
                                         @if($stores->package)
                                             <a href="{{route('storeLogin', [$stores->id])}}"
                                                class="btn btn-primary">Login</a>
                                         @endif
-
+                                        @if(Auth::user()->role_id === 1)
                                         <!-- <a href="" class="btn btn-primary">edit</a> -->
                                         <a href="{{route('deleteStore', [$stores->id])}}"
                                            class="btn btn-danger">delete</a>
+                                         @endif
 
 
                                     </td>

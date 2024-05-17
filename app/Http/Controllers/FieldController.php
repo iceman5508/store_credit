@@ -13,6 +13,9 @@ class FieldController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index(){
+        if(auth()->user()->role_id !== 0){
+            return view('dashboard.index');
+        }
         $store = Auth::user()->store->id;
         $all_fields = Field::storeEnabled($store);
         return view('dashboard.fields', compact('all_fields'));
