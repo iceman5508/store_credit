@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{{$employee->name}}</td>
                                 <td>{{$employee->email}}</td>
-                                <td>{{$employee->created_at}}</td>
+                                <td>{{date('m/d/Y h:i A', strtotime($employee->created_at))}}</td>
                             </tr>
                         @endforeach
 

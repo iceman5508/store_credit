@@ -37,7 +37,7 @@
                                 <td>{{$customer->verified()}}</td>
                                 <td>${{$customer->lifetime_credit()}}</td>
                                 <td>${{$customer->available_credit()}}</td>
-                                <td>{{$customer->created_at}}</td>
+                                <td>{{date('m/d/Y h:i A', strtotime($customer->created_at))}}</td>
                             </tr>
                         @endforeach
 

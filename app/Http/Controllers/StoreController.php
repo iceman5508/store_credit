@@ -16,7 +16,7 @@ class StoreController extends Controller
 
     public function index()
     {
-        if(auth()->user()->role_id !== 0){
+        if(auth()->user()->role_id !== 1){
             return view('dashboard.index');
         }
         return view('dashboard.employees');

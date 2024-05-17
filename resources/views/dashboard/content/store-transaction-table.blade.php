@@ -32,7 +32,7 @@
                                 <td>{{$credit->customer->name}}</td>
                                 <td>{{$credit->value}}</td>
                                 <td>{{$credit->operator->name}}</td>
-                                <td>{{$credit->created_at}}</td>
+                                <td>{{date('m/d/Y h:i A', strtotime($credit->created_at))}}</td>
                             </tr>
                         @endforeach
 
