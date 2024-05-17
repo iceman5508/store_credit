@@ -37,6 +37,14 @@ class Store extends Model
         return $this->users()->where('role_id','=', 3);
     }
 
+    /**
+     * Return all employees
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function employees(){
+        return $this->users()->where('role_id','=', 2);
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -83,7 +91,7 @@ class Store extends Model
     public function userFields(int $user_id): array
     {
         $fields = [];
-        foreach ($this->enabled_fields()->get() as $efields){
+        foreach ($this->active_fields()->get() as $efields){
             $value = $efields->field->storeUserValue($this->id, $user_id);
             if(!empty($value)){
                 $value = $value[0];

@@ -40,7 +40,7 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item  {{ request()->routeIs('customers') ? 'active' : '' }}">
+    <li class="nav-item  {{ request()->is('dashboard/members/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
            aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
@@ -49,8 +49,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">App Users</a>
+                <a class="collapse-item" href="{{route('employees')}}">Employees</a>
                 <a class="collapse-item" href="{{route('customers')}}">Customers</a>
+                <a class="collapse-item" href="{{route('transactions')}}">Transactions</a>
             </div>
         </div>
     </li>

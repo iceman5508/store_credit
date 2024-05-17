@@ -36,8 +36,6 @@ Route::middleware('auth')->prefix('dashboard/')->group(function(){
 
     Route::middleware('storeSelected')->group(function(){
 
-        Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers');
-
         Route::post('select_subscription', [\App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
 
         Route::post('/save-customer', [\App\Http\Controllers\CustomerController::class, 'saveCustomer'])->name('saveCustomer');
@@ -55,6 +53,14 @@ Route::middleware('auth')->prefix('dashboard/')->group(function(){
             Route::post('/fields', [\App\Http\Controllers\FieldController::class, 'toggleField'])->name('toggleField');
             Route::post('/userField/{user}', [\App\Http\Controllers\CustomerController::class, 'toggleUserField'])->name('toggleUserField');
             Route::post('/addField', [\App\Http\Controllers\FieldController::class, 'addField'])->name('addField');
+
+        });
+
+        Route::prefix('members/')->group(function() {
+            Route::get('/customers', [\App\Http\Controllers\CustomerController::class, 'index'])->name('customers');
+            Route::get('/transactions', [\App\Http\Controllers\CustomerController::class, 'transactions'])->name('transactions');
+            Route::get('/employees', [\App\Http\Controllers\StoreController::class, 'index'])->name('employees');
+            Route::post('/employees', [\App\Http\Controllers\StoreController::class, 'addEmployee'])->name('addEmployee');
 
         });
 

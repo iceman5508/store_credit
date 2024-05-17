@@ -70,7 +70,7 @@ class CustomerController extends Controller
         if($request->trans_credit < 0)
         {
             $user = User::findOrFail($request->selCustomer);
-            if($user->available_credit() < ($request->trans_credit)*-1){
+            if($user->available_credit() < abs($request->trans_credit)){
                 return back()->with('error',"User does not have enough credit to complete this transaction!");
             }
         }
@@ -167,5 +167,10 @@ class CustomerController extends Controller
 
     function index(){
         return view('dashboard.customers');
+    }
+
+
+    function transactions(){
+        return view('dashboard.transactions');
     }
 }

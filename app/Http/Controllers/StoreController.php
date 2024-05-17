@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\NewEmployeeRequest;
 use App\Models\Package;
 use App\Models\User;
 use Core\Authentication\Auth;
 use Illuminate\Http\Request;
 use App\Models\Store;
+use Illuminate\Support\Facades\Hash;
 
 class StoreController extends Controller
 {
 
     public function index()
     {
-
+        return view('dashboard.employees');
     }
 
     public function addStore(){
@@ -22,10 +25,25 @@ class StoreController extends Controller
        return view('addStore', compact('store', 'package'));
     }
 
-
-    public function create()
+    /**
+     *Add employee
+     * @param Request $request
+     * @return void
+     */
+    public function addEmployee(NewEmployeeRequest $request)
     {
-        //
+        $user =  User::create([
+            'name' => $request->name,
+            'password' => Hash::make($request->password),
+            'email' => $request->email,
+            'store_id' => \Illuminate\Support\Facades\Auth::user()->store->id,
+            'role_id' => 2
+        ]);
+
+
+
+        return back()->with('success',"{$request->name}'s account was successfully created!");
+
     }
 
 
