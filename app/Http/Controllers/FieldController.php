@@ -13,7 +13,7 @@ class FieldController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index(){
-        if(auth()->user()->role_id !== 0){
+        if(auth()->user()->role_id !== 1){
             return view('dashboard.index');
         }
         $store = Auth::user()->store->id;
